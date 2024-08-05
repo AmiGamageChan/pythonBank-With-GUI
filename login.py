@@ -8,7 +8,8 @@ import user
 # Quit Function
 def quit_application():
     frame.destroy()
-    
+
+
 # User Logged In Screen Redirection
 def user_logged_in(accId):
     frame.destroy()
@@ -90,9 +91,9 @@ def user_login_screen():
     system_label = components.Label(
         label_frame, text="", font=("Quicksand", 10, "bold"), style="Label"
     )
-    system_label.pack(side="left")
-
     message_label = components.Label(label_frame, text=" ", font=("Quicksand", 10))
+
+    system_label.pack(side="left")
     message_label.pack(side="left")
 
     frame.mainloop()
@@ -107,19 +108,22 @@ def login_process():
         system_label.config(text="")
         message_label.config(text=(""))
 
-        accId = int(accId) #Account ID
-        password = str(password) #Password
-        
+        accId = int(accId)  # Account ID
+        password = str(password)  # Password
+
         # Search Query
-        resultset = con.search(f"SELECT * FROM `accounts` WHERE `account_id` = '{accId}' AND `password` = '{password}'")
-        
-        if len(resultset)==1:
+        resultset = con.search(
+            f"SELECT * FROM `accounts` WHERE `account_id` = '{accId}' AND `password` = '{password}'"
+        )
+
+        if len(resultset) == 1:
             system_label.config(text="SYSTEM:")
-            message_label.config(text=("Logged in Successfully")) 
+            message_label.config(text=("Logged in Successfully"))
+            # Function Call
             user_logged_in(accId)
         else:
             system_label.config(text="SYSTEM:")
-            message_label.config(text=("Account ID or Password error"))     
+            message_label.config(text=("Account ID or Password error"))
 
     else:
         system_label.config(text="SYSTEM:")
@@ -129,5 +133,3 @@ def login_process():
 # Main method
 def main():
     user_login_screen()
-
-
