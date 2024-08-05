@@ -88,21 +88,21 @@ def user_screen(accId):
         text="Deposit",
         style="Custom.TButton",
         # Function Call
-        command=lambda: transaction(1),
+        command=lambda: transaction(1,accId),
     )
     withdraw_button = components.Button(
         button_frame,
         text="Withdraw",
         style="Custom.TButton",
         # Function Call
-        command=lambda: transaction(2),
+        command=lambda: transaction(2,accId),
     )
     transfer_button = components.Button(
         button_frame,
         text="Transfer",
         style="Custom.TButton",
         # Function Call
-        command=lambda: transaction(3),
+        command=lambda: transaction(3,accId),
     )
 
     deposit_button.pack(pady=(25, 15))
@@ -113,23 +113,22 @@ def user_screen(accId):
 
 
 # Transaction Redirection
-def transaction(id):
+def transaction(id,accId):
     id = int(id)
     if id == 1:
         frame.destroy()
         # Function Call
-        deposit.main()
+        deposit.main(accId)
     elif id == 2:
+        frame.destroy()
         # Function Call
-        withdraw.main()
+        withdraw.main(accId)
     elif id == 3:
+        frame.destroy()
         # Function Call
-        transfer.main()
+        transfer.main(accId)
 
 
 # Main Function
 def main(accId):
     user_screen(accId)
-
-
-main(1)

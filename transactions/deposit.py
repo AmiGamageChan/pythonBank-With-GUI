@@ -1,6 +1,6 @@
-from transactions.frameTemplate import create_frame,quit_application
+from transactions.frameTemplate import create_frame
 
-def main():
-    frame = create_frame("Deposit","deposit")
+def main(accId):
+    frame = create_frame("Deposit","deposit",accId)
     
     
