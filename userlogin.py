@@ -33,7 +33,7 @@ def back():
     frame.destroy()
     import login
 
-    login.main()
+    login.main(0,0)
 
 
 # Sign In Screen
