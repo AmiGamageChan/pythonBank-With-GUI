@@ -2,18 +2,23 @@ import tkinter as gui
 from tkinter import ttk as components  # Some components
 from PIL import Image, ImageTk
 import login
+import signin
 
 
 # Quit Function
 def quit_application():
     frame.destroy()
 
-
 # User Login Redirection
 def redirect_user_login():
     frame.destroy()
     # Function Call
     login.main()
+    
+def redirect_user_signIn():
+    frame.destroy()
+    # Function Call
+    signin.main()
 
 
 # Welcome Screen
@@ -46,7 +51,7 @@ def welcome_screen():
     button_frame = gui.Frame(frame)
     button_frame.pack(pady=25)
 
-    style.configure("Custom.TButton", font=("Quicksand", 12), width=15, padding=4)
+    style.configure("Custom.TButton", font=("Quicksand", 12), width=10, padding=3)
 
     login_button = components.Button(
         button_frame,
@@ -56,16 +61,25 @@ def welcome_screen():
         command=redirect_user_login,
     )
 
+    signin_button = components.Button(
+        button_frame,
+        text="User Sign In",
+        style="Custom.TButton",
+        # Function Call
+        command=redirect_user_signIn,
+    )
+
     quit_button = components.Button(
         button_frame,
-        text="Exit App",
+        text="❌",
         style="Custom.TButton",
         # Function Call
         command=quit_application,
     )
 
-    login_button.pack(side="left", padx=10)
-    quit_button.pack(side="left", padx=10)
+    login_button.pack(side="left", padx=1)
+    signin_button.pack(side="left", padx=1)
+    quit_button.pack(side="left", padx=1)
 
     # Run
     frame.mainloop()

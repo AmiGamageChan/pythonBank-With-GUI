@@ -14,6 +14,14 @@ def quit_application():
     frame.destroy()
 
 
+# Exit
+def exit():
+    frame.destroy()
+    import main
+
+    main.main()
+
+
 # Main User Screen
 def user_screen(accId):
     global frame
@@ -73,7 +81,7 @@ def user_screen(accId):
     button_frame.pack()
 
     # buttons
-    #Custom style
+    # Custom style
     style.configure(
         "Custom.TButton",
         font=("Quicksand", 10, "bold"),
@@ -83,37 +91,55 @@ def user_screen(accId):
         background="blue",
     )
 
+    style.configure(
+        "Custom1.TButton",
+        font=("Quicksand", 10, "bold"),
+        width=25,
+        padding=10,
+        foreground="red",
+        background="black",
+    )
+
     deposit_button = components.Button(
         button_frame,
         text="Deposit",
         style="Custom.TButton",
         # Function Call
-        command=lambda: transaction(1,accId),
+        command=lambda: transaction(1, accId),
     )
     withdraw_button = components.Button(
         button_frame,
         text="Withdraw",
         style="Custom.TButton",
         # Function Call
-        command=lambda: transaction(2,accId),
+        command=lambda: transaction(2, accId),
     )
     transfer_button = components.Button(
         button_frame,
         text="Transfer",
         style="Custom.TButton",
         # Function Call
-        command=lambda: transaction(3,accId),
+        command=lambda: transaction(3, accId),
+    )
+
+    exit_button = components.Button(
+        button_frame,
+        text="❌Exit❌",
+        style="Custom1.TButton",
+        # Function Call
+        command=exit,
     )
 
     deposit_button.pack(pady=(25, 15))
     withdraw_button.pack(pady=15)
     transfer_button.pack(pady=15)
+    exit_button.pack(pady=15)
 
     frame.mainloop()
 
 
 # Transaction Redirection
-def transaction(id,accId):
+def transaction(id, accId):
     id = int(id)
     if id == 1:
         frame.destroy()

@@ -8,6 +8,13 @@ import user
 # Quit Function
 def quit_application():
     frame.destroy()
+    
+# Back function
+def exit():
+    frame.destroy()
+    import main
+
+    main.main()
 
 
 # User Logged In Screen Redirection
@@ -66,10 +73,18 @@ def user_login_screen():
         "Custom.TButton",
         font=("Quicksand", 12),
         width=25,
-        foreground="red",
+        foreground="green",
         background="blue",
     )
 
+    style.configure(
+        "Custom1.TButton",
+        font=("Quicksand", 12,),
+        width=25,
+        foreground="red",
+        background="black",
+    )
+    
     # button
     login_button = components.Button(
         frame,
@@ -78,6 +93,10 @@ def user_login_screen():
         command=login_process,
     )
     login_button.pack(padx=10, pady=20)
+
+    button_exit = components.Button(frame, text="Back", style="Custom1.TButton",command=exit)
+
+    button_exit.pack(padx=10)
 
     # labels
     label_frame = gui.Frame()
