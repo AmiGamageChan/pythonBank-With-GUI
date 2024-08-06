@@ -18,11 +18,15 @@ def logIn_process():
         nic = int(nic)
 
         nic_result = connection.search(f"SELECT `id` FROM `user` WHERE `nic` = '{nic}'")
-        uId = nic_result[0][0]
-        
-        frame.destroy()
-        accounts.main(uId)
-        
+        if nic_result:
+            uId = nic_result[0][0]
+
+            frame.destroy()
+            accounts.main(uId)
+        else:
+            system_label.config(text="SYSTEM:")
+            message_label.config(text="No Account with the given NIC")
+
     else:
         system_label.config(text="SYSTEM:")
         message_label.config(text="Please enter a valid NIC")
@@ -33,7 +37,7 @@ def back():
     frame.destroy()
     import login
 
-    login.main(0,0)
+    login.main(0, 0)
 
 
 # Sign In Screen
