@@ -2,6 +2,7 @@ import tkinter as gui
 from tkinter import ttk as components
 from PIL import Image, ImageTk
 import connection
+import accounts
 
 
 # Quit Function
@@ -10,60 +11,35 @@ def quit_application():
 
 
 # Sign In Process
-def signIn_process():
-    fname = fname_text.get()
-    lname = lname_text.get()
+def logIn_process():
     nic = nic_text.get()
 
-    if fname.isalpha():
-        fname = fname.capitalize()  # Capitalize first letter
-        if lname.isalpha():
-            lname = lname.capitalize()  # Capitalize first letter
-            if nic.isdigit():
-                nic = int(nic)
-                system_label.config(text="")
-                message_label.config(text="")
+    if nic.isdigit():
+        nic = int(nic)
 
-                # Search Query
-                user_result = connection.search(
-                    f"SELECT * FROM `user` WHERE `nic` = '{nic}'"
-                )
-                if user_result:
-                    system_label.config(text="SYSTEM:")
-                    message_label.config(text="User already exists with that NIC")
-                else:
-                    # Success Code
-
-                    # Insert Query
-                    connection.iud(
-                        f"INSERT INTO `user` (`fname`,`lname`,`nic`) VALUES ('{fname}','{lname}','{nic}')"
-                    )
-
-                    system_label.config(text="SYSTEM:")
-                    message_label.config(text="User registered Successfully")
-            else:
-                system_label.config(text="SYSTEM:")
-                message_label.config(text="Please enter a valid nic")
-        else:
-            system_label.config(text="SYSTEM:")
-            message_label.config(text="Please enter a valid name")
+        nic_result = connection.search(f"SELECT `id` FROM `user` WHERE `nic` = '{nic}'")
+        uId = nic_result[0][0]
+        
+        frame.destroy()
+        accounts.main(uId)
+        
     else:
         system_label.config(text="SYSTEM:")
-        message_label.config(text="Please enter a valid name")
+        message_label.config(text="Please enter a valid NIC")
 
 
 # Back Function
 def back():
     frame.destroy()
-    import main
+    import login
 
-    main.main()
+    login.main()
 
 
 # Sign In Screen
-def user_signin_screen():
+def user_login_screen():
     global frame
-    global fname_text, lname_text, message_label, system_label, nic_text
+    global message_label, system_label, nic_text
 
     # frame
     frame = gui.Tk()
@@ -89,26 +65,10 @@ def user_signin_screen():
     imgLabel.pack()
 
     # form
-    fname_label = components.Label(frame, text="Enter your first Name", justify="left")
 
-    fname_text = components.Entry(
-        frame,
-        width=25,
-        font=("Quicksand", 12),
-        justify="left",
-    )
-    lname_label = components.Label(frame, text="Enter your last name", justify="left")
-
-    lname_text = components.Entry(
-        frame, width=25, font=("Quicksand", 12), justify="left"
-    )
     nic_label = components.Label(frame, text="Enter your NIC", justify="left")
     nic_text = components.Entry(frame, width=25, font=("Quicksand", 12), justify="left")
 
-    fname_label.pack(pady=(15, 0))
-    fname_text.pack()
-    lname_label.pack(pady=(15, 0))
-    lname_text.pack()
     nic_label.pack(pady=(15, 0))
     nic_text.pack()
 
@@ -131,10 +91,10 @@ def user_signin_screen():
     # buttons
     login_button = components.Button(
         frame,
-        text="User Sign In",
+        text="User Log In",
         style="Custom.TButton",
         # Function Calling
-        command=signIn_process,
+        command=logIn_process,
     )
     login_button.pack(padx=10, pady=(20, 10))
 
@@ -169,4 +129,4 @@ def user_signin_screen():
 
 # Main method
 def main():
-    user_signin_screen()
+    user_login_screen()

@@ -36,7 +36,7 @@ def user_screen(accId):
     user = resultset[0][1]  # Username
     balance = resultset1[0][1]  # Balance
 
-    frame.title("Ami Bank")
+    frame.title("Ami Bank - User Screen")
     frame.geometry("400x570")
     frame.resizable(width=False, height=False)
 

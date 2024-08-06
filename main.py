@@ -13,7 +13,7 @@ def quit_application():
 def redirect_user_login():
     frame.destroy()
     # Function Call
-    login.main()
+    login.main(0,0)
     
 def redirect_user_signIn():
     frame.destroy()
@@ -27,7 +27,7 @@ def welcome_screen():
     frame = gui.Tk()
     style = components.Style()
 
-    frame.title("Ami Bank App")
+    frame.title("Ami Bank Application")
     frame.geometry("400x570")
     frame.resizable(width=False, height=False)
 
@@ -55,7 +55,7 @@ def welcome_screen():
 
     login_button = components.Button(
         button_frame,
-        text="User Login",
+        text="Acc Login",
         style="Custom.TButton",
         # Function Call
         command=redirect_user_login,
