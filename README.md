@@ -4,3 +4,5 @@ Includes<br>
 *User account logins <br>
 *Basic transations like deposit,withdraw,transfer,balance checking <br>
 *User input validations
+
+Change credentials in connection.py
